@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this material, please cite the paper."
+title: "Attaining the Plotkin Bound for Permutation Codes in the Kendall tau-Metric: supplementary material"
+authors:
+  - family-names: Chee
+    given-names: Yeow Meng
+repository-code: "https://github.com/ymchee66/kendall-plotkin"
+license: MIT

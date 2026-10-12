@@ -1,0 +1,39 @@
+n16_M6.txt: n=16, size 6, pairwise distances [72], splits [3] -> OK
+n8_M8.txt: n=8, size 8, pairwise distances [16], splits [4] -> OK
+n7_M7.txt: n=7, size 7, pairwise distances [12], splits [3, 4] -> OK
+n5_M5.txt: n=5, size 5, pairwise distances [6], splits [2, 3] -> OK
+
+The 20 permutations of length five at distance 6 from 01234:
+  v00 = 04321
+  v01 = 13420
+  v02 = 14230
+  v03 = 14302
+  v04 = 21430
+  v05 = 23140
+  v06 = 23401
+  v07 = 24031
+  v08 = 24103
+  v09 = 30421
+  v10 = 31240
+  v11 = 31402
+  v12 = 32041
+  v13 = 32104
+  v14 = 34012
+  v15 = 40231
+  v16 = 40312
+  v17 = 41032
+  v18 = 41203
+  v19 = 42013
+degrees (degree: number of vertices): {7: 4, 6: 14, 4: 2}
+edges: 60, triangles: 36, cliques of size 4: 7, cliques of size 5: 0
+cliques of size 4:
+  {04321, 14302, 24103, 32104}
+  {04321, 23401, 31402, 41203}
+  {13420, 24103, 32041, 40312}
+  {14230, 24031, 32104, 34012}
+  {14302, 23140, 30421, 42013}
+  {21430, 31402, 32041, 40231}
+  {24031, 30421, 31240, 41032}
+clique number: 4
+
+All checks passed.
