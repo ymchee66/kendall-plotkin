@@ -6,7 +6,7 @@ Uses only the Python standard library.  Run from the repository root with
     python3 verify.py
 
 1. For each code in codes/, checks that its rows are permutations of
-   0, ..., n-1, that all pairwise Kendall tau-distances equal the value stated
+   0, ..., n-1, that all pairwise distances in the Kendall tau-metric equal the value stated
    in the paper, and that every pair of symbols has the stated splits.
 2. Carries out the computation in the proof of Theorem 7.1(b) for
    permutation length five.  It lists the 20 permutations at distance six from

@@ -1,5 +1,5 @@
 /* Simulated annealing search for permutation codes attaining the Plotkin bound.
-   Finds M permutations of length n, pairwise at Kendall tau-distance exactly D = m*C(n,2)/(2m-1),
+   Finds M permutations of length n in the Kendall tau-metric, pairwise at distance exactly D = m*C(n,2)/(2m-1),
    with every pair of symbols split as evenly as possible.
    Usage: sa n M seed iters_millions [T0 T1]
    Example: ./sa 8 8 1 200 1.5 0.5 */

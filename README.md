@@ -24,7 +24,7 @@ Each file in `codes/` lists one permutation per line, as the sequence of its sym
 python3 verify.py
 ```
 
-The script checks that every row of each code is a permutation of 0, …, n−1, that all pairwise Kendall τ-distances equal the stated value, and that every pair of symbols has the stated splits. It then lists the 20 permutations of length five at distance six from 01234, builds the graph in which two of them are adjacent when they are at distance six, and reports its degrees, its numbers of edges, triangles and cliques of size four, the seven cliques of size four, and its clique number, which is four. The script exits with a nonzero status if any check fails.
+The script checks that every row of each code is a permutation of 0, …, n−1, that all pairwise distances in the Kendall τ-metric equal the stated value, and that every pair of symbols has the stated splits. It then lists the 20 permutations of length five at distance six from 01234, builds the graph in which two of them are adjacent when they are at distance six, and reports its degrees, its numbers of edges, triangles and cliques of size four, the seven cliques of size four, and its clique number, which is four. The script exits with a nonzero status if any check fails.
 
 ## Search program
 
