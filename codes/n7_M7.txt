@@ -1,5 +1,5 @@
 # Table II: seven permutations of length seven, pairwise at distance 12
-# (proof of Theorem 7.1(c)).
+# (proof of Theorem 9.1(c)).
 0 1 2 3 4 5 6
 4 6 2 1 0 3 5
 0 6 5 2 3 4 1

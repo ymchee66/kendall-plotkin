@@ -2,6 +2,28 @@ n16_M6.txt: n=16, size 6, pairwise distances [72], splits [3] -> OK
 n8_M8.txt: n=8, size 8, pairwise distances [16], splits [4] -> OK
 n7_M7.txt: n=7, size 7, pairwise distances [12], splits [3, 4] -> OK
 n5_M5.txt: n=5, size 5, pairwise distances [6], splits [2, 3] -> OK
+n14_M6.txt: n=14, size 6, pairwise distances [54], required at least 54 -> OK
+n17_M6.txt: n=17, size 6, pairwise distances [78, 79, 80, 82], required at least 78 -> OK
+n18_M6.txt: n=18, size 6, pairwise distances [90, 92], required at least 90 -> OK
+n19_M6.txt: n=19, size 6, pairwise distances [102, 104], required at least 102 -> OK
+n13_M8.txt: n=13, size 8, pairwise distances [44, 46], required at least 44 -> OK
+n14_M10.txt: n=14, size 10, pairwise distances [50, 52], required at least 50 -> OK
+n23_M10.txt: n=23, size 10, pairwise distances [140, 142], required at least 140 -> OK
+n26_M10.txt: n=26, size 10, pairwise distances [180, 182], required at least 180 -> OK
+n30_M10.txt: n=30, size 10, pairwise distances [240, 242, 244], required at least 240 -> OK
+n33_M10.txt: n=33, size 10, pairwise distances [290, 292, 294], required at least 290 -> OK
+n34_M10.txt: n=34, size 10, pairwise distances [310, 312], required at least 310 -> OK
+n35_M10.txt: n=35, size 10, pairwise distances [330], required at least 330 -> OK
+n9_M9.txt: n=9, size 9, pairwise distances [20] -> OK
+
+Example 4.7 code is a code of insertion permutations: True
+n16_M6.txt can be relabelled into a code of insertion permutations: False
+
+Lengths n < 2T_m in the proof of Corollary 9.3:
+  m=2: [3, 4] -> OK
+  m=3: [5, 14, 16, 17, 18, 19] -> OK
+  m=4: [7, 8, 13] -> OK
+  m=5: [9, 14, 23, 26, 28, 30, 33, 34, 35] -> OK
 
 The 20 permutations of length five at distance 6 from 01234:
   v00 = 04321

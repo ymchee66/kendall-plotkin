@@ -1,5 +1,5 @@
 # Six permutations of length 16, pairwise at distance 72 in the Kendall tau-metric,
-# with every pair of symbols of split three (proof of Theorem 7.1(b)).
+# with every pair of symbols of split three (proofs of Theorem 9.1(b) and Corollary 9.3).
 5 2 3 9 7 8 13 15 14 12 11 10 6 4 1 0
 0 3 4 10 8 9 12 14 15 13 6 11 7 5 2 1
 1 4 5 11 9 10 13 15 14 12 7 6 8 0 3 2
