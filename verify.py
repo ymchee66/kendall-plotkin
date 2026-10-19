@@ -1,5 +1,5 @@
-"""Verification script for "Optimal Permutation Codes in the Plotkin Regime
-of the Kendall tau-Metric" by Y. M. Chee.
+"""Verification script for "Optimal Permutation Codes Throughout the Plotkin
+Regime of the Kendall tau-Metric" by Y. M. Chee.
 
 Uses only the Python standard library.  Run from the repository root with
 

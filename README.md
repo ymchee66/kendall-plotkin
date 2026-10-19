@@ -1,4 +1,4 @@
-# Optimal Permutation Codes in the Plotkin Regime of the Kendall τ-Metric
+# Optimal Permutation Codes Throughout the Plotkin Regime of the Kendall τ-Metric
 
 Supplementary material for the paper
 
