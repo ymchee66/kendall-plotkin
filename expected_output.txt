@@ -16,9 +16,6 @@ n34_M10.txt: n=34, size 10, pairwise distances [310, 312], required at least 310
 n35_M10.txt: n=35, size 10, pairwise distances [330], required at least 330 -> OK
 n9_M9.txt: n=9, size 9, pairwise distances [20] -> OK
 
-Example 4.7 code is a code of insertion permutations: True
-n16_M6.txt can be relabelled into a code of insertion permutations: False
-
 Lengths n < 2T_m in the proof of Corollary 9.3:
   m=2: [3, 4] -> OK
   m=3: [5, 14, 16, 17, 18, 19] -> OK

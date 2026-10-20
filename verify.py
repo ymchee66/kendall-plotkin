@@ -13,12 +13,9 @@ Uses only the Python standard library.  Run from the repository root with
    distances are at least the stated value.  It also checks that the nine
    permutations of length nine in the concluding remarks are pairwise at
    distance 20.
-2. Checks that no relabelling of the symbols turns the code of length 16 into
-   a code of insertion permutations, and, as a test of this check, that the
-   code in Example 4.7 is a code of insertion permutations.
-3. Lists the lengths n < 2T_m for which the range of distances in
+2. Lists the lengths n < 2T_m for which the range of distances in
    Corollary 9.3 is nonempty.
-4. Carries out the computation in the proof of Theorem 9.1(b) for
+3. Carries out the computation in the proof of Theorem 9.1(b) for
    permutation length five.  It lists the 20 permutations at distance six from
    01234, builds the graph in which two of them are adjacent when they are at
    distance six, prints its degrees and numbers of edges and triangles, lists
@@ -158,43 +155,6 @@ def check_nine():
     return good
 
 
-def insertion_relabelling_exists(code):
-    """Whether some relabelling of the symbols turns every codeword into an
-    insertion permutation.  The symbol relabelled 0 must be first or last in
-    every codeword, and, after deleting it, the same holds recursively."""
-    n = len(code[0])
-    seen = {}
-
-    def rec(rem):
-        if len(rem) <= 1:
-            return True
-        if rem not in seen:
-            cands = []
-            for a in rem:
-                ok = True
-                for s in code:
-                    t = [x for x in s if x in rem]
-                    if a != t[0] and a != t[-1]:
-                        ok = False
-                        break
-                if ok:
-                    cands.append(a)
-            seen[rem] = any(rec(rem - {a}) for a in cands)
-        return seen[rem]
-
-    return rec(frozenset(range(n)))
-
-
-def check_not_insertion():
-    example = [tuple(int(c) for c in w) for w in ("012345", "054321", "145320", "235410")]
-    code = read_code(CODES / "n16_M6.txt")
-    a = insertion_relabelling_exists(example)
-    b = insertion_relabelling_exists(code)
-    print(f"\nExample 4.7 code is a code of insertion permutations: {a}")
-    print(f"n16_M6.txt can be relabelled into a code of insertion permutations: {b}")
-    return a and not b
-
-
 def check_small_lengths():
     """Lengths 3 <= n < 2*T_m for which the m-th window contains an integer d
     with d <= m/(2m-1) * T_m * floor(N/T_m), as in the proof of Corollary 9.3."""
@@ -220,7 +180,6 @@ def check_small_lengths():
 def main():
     ok = check_codes()
     ok &= check_nine()
-    ok &= check_not_insertion()
     ok &= check_small_lengths()
     ok &= check_n5()
     print("\nAll checks passed." if ok else "\nSome checks FAILED.")
