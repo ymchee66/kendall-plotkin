@@ -2,7 +2,7 @@
 
 Supplementary material for the paper
 
-> Y. M. Chee, "Optimal permutation codes in the Plotkin regime of the Kendall τ-metric."
+> Y. M. Chee, "Optimal permutation codes throughout the Plotkin regime of the Kendall τ-metric."
 
 ## Contents
 
@@ -17,7 +17,13 @@ Supplementary material for the paper
 | `codes/n18_M6.txt` | Six permutations of length 18, pairwise at distance at least 90. Used in the proof of Corollary 9.3. |
 | `codes/n19_M6.txt` | Six permutations of length 19, pairwise at distance at least 102. Used in the proofs of Theorem 9.2 and Corollary 9.3. |
 | `codes/n13_M8.txt` | Eight permutations of length 13, pairwise at distance at least 44. Used in the proofs of Theorem 9.2 and Corollary 9.3. |
-| `codes/n*_M10.txt` | Ten permutations of length n ∈ {14, 23, 26, 30, 33, 34, 35}, pairwise at distance at least 10⌊C(n,2)/18⌋. Used in the proof of Corollary 9.3(d). |
+| `codes/n14_M10.txt` | Ten permutations of length 14, pairwise at distance at least 50 = 10⌊C(14,2)/18⌋. Used in the proof of Corollary 9.3(d). |
+| `codes/n23_M10.txt` | Ten permutations of length 23, pairwise at distance at least 140 = 10⌊C(23,2)/18⌋. Used in the proof of Corollary 9.3(d). |
+| `codes/n26_M10.txt` | Ten permutations of length 26, pairwise at distance at least 180 = 10⌊C(26,2)/18⌋. Used in the proof of Corollary 9.3(d). |
+| `codes/n30_M10.txt` | Ten permutations of length 30, pairwise at distance at least 240 = 10⌊C(30,2)/18⌋. Used in the proof of Corollary 9.3(d). |
+| `codes/n33_M10.txt` | Ten permutations of length 33, pairwise at distance at least 290 = 10⌊C(33,2)/18⌋. Used in the proof of Corollary 9.3(d). |
+| `codes/n34_M10.txt` | Ten permutations of length 34, pairwise at distance at least 310 = 10⌊C(34,2)/18⌋. Used in the proof of Corollary 9.3(d). |
+| `codes/n35_M10.txt` | Ten permutations of length 35, pairwise at distance at least 330 = 10⌊C(35,2)/18⌋. Used in the proof of Corollary 9.3(d). |
 | `codes/n9_M9.txt` | Nine permutations of length nine, pairwise at distance 20 (concluding remarks). |
 | `verify.py` | Verifies all codes, lists the small lengths treated in the proof of Corollary 9.3, and carries out the computation for permutation length five in the proof of Theorem 9.1(b). Python 3, standard library only. |
 | `expected_output.txt` | Output of `verify.py`. |
