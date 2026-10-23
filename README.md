@@ -1,8 +1,8 @@
-# Optimal Permutation Codes Throughout the Plotkin Regime of the Kendall τ-Metric
+# Eventual Attainment of the Plotkin Bound for Kendall τ Permutation Codes in Every Fixed Window
 
 Supplementary material for the paper
 
-> Y. M. Chee, "Optimal permutation codes throughout the Plotkin regime of the Kendall τ-metric."
+> Y. M. Chee, "Eventual attainment of the Plotkin bound for Kendall τ permutation codes in every fixed window."
 
 ## Contents
 
@@ -27,6 +27,7 @@ Supplementary material for the paper
 | `codes/n9_M9.txt` | Nine permutations of length nine, pairwise at distance 20 (concluding remarks). |
 | `verify.py` | Verifies all codes, lists the small lengths treated in the proof of Corollary 9.3, and carries out the computation for permutation length five in the proof of Theorem 9.1(b). Python 3, standard library only. |
 | `expected_output.txt` | Output of `verify.py`. |
+| `test_verify.py` | Negative tests: damages copies of the certificates (removing a codeword, duplicating a codeword, lengthening a codeword) or the expected parameters (length, size, distance), and checks that `verify.py` reports a failure in every case. |
 | `search/sa.c` | Heuristic simulated annealing program (not needed for verification) used to find the codes of lengths 7 and 8, which attain the Plotkin bound with equal pairwise distances. |
 | `search/sa_atleast.c` | Heuristic simulated annealing program (not needed for verification) used to find the codes whose pairwise distances are at least a given value. |
 
@@ -36,9 +37,10 @@ Each file in `codes/` lists one permutation per line, as the sequence of its sym
 
 ```
 python3 verify.py
+python3 test_verify.py
 ```
 
-The script checks that every row of each code is a permutation of 0, …, n−1. For the codes that attain the Plotkin bound, it checks that all pairwise distances in the Kendall τ-metric equal the stated value and that every pair of symbols has the stated splits. For the codes used in Theorem 9.2 and Corollary 9.3, it checks that all pairwise distances are at least the stated value, and it checks that the nine permutations of length nine are pairwise at distance 20. It then lists, for m = 2, 3, 4, 5, the lengths 3 ≤ n < 2Tₘ for which the range of distances in Corollary 9.3 contains an integer. It then lists the 20 permutations of length five at distance six from 01234, builds the graph in which two of them are adjacent when they are at distance six, and reports its degrees, its numbers of edges, triangles and cliques of size four, the seven cliques of size four, and its clique number, which is four. The script exits with a nonzero status if any check fails.
+For each certificate, the script checks the expected length n and size M, that every row is a permutation of 0, …, n−1, that the rows are distinct, and that all pairwise distances in the Kendall τ-metric equal the stated value (for the five equidistant codes, whose distance is m/(2m−1)·C(n,2) and whose splits are also checked) or are at least the stated value (for the other twelve codes). The expected parameters are listed in `CERTIFICATES` in `verify.py`. It then lists, for m = 2, 3, 4, 5, the lengths 3 ≤ n < 2Tₘ for which the range of distances in Corollary 9.3 contains an integer. It then lists the 20 permutations of length five at distance six from 01234, builds the graph in which two of them are adjacent when they are at distance six, and reports its degrees, its numbers of edges, triangles and cliques of size four, the seven cliques of size four, and its clique number, which is four. The script exits with a nonzero status if any check fails.
 
 ## Search programs
 

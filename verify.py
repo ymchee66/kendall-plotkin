@@ -1,18 +1,18 @@
-"""Verification script for "Optimal Permutation Codes Throughout the Plotkin
-Regime of the Kendall tau-Metric" by Y. M. Chee.
+"""Verification script for "Eventual Attainment of the Plotkin Bound for Kendall
+tau Permutation Codes in Every Fixed Window" by Y. M. Chee.
 
 Uses only the Python standard library.  Run from the repository root with
 
     python3 verify.py
 
-1. For each code in codes/, checks that its rows are permutations of
-   0, ..., n-1.  For the codes attaining the Plotkin bound, it checks that
-   all pairwise distances in the Kendall tau-metric equal the value stated in
-   the paper and that every pair of symbols has the stated splits.  For the
-   codes used in Theorem 9.2 and Corollary 9.3, it checks that all pairwise
-   distances are at least the stated value.  It also checks that the nine
-   permutations of length nine in the concluding remarks are pairwise at
-   distance 20.
+1. For each of the 17 certificates in codes/, checks the expected length n
+   and size M, that every codeword is a permutation of 0, ..., n-1, that the
+   codewords are distinct, and that all pairwise distances in the Kendall
+   tau-metric equal (for the five equidistant codes) or are at least (for
+   the other twelve codes) the value stated in the paper.  For the five
+   equidistant codes, whose distance is m/(2m-1) * C(n,2), it also checks
+   the splits of all pairs of symbols.  The expected parameters are listed in CERTIFICATES.  An optional
+   argument names a different directory of certificates.
 2. Lists the lengths n < 2T_m for which the range of distances in
    Corollary 9.3 is nonempty.
 3. Carries out the computation in the proof of Theorem 9.1(b) for
@@ -32,31 +32,30 @@ import sys
 
 CODES = Path(__file__).resolve().parent / "codes"
 
-# Codes attaining the Plotkin bound: file name -> (pairwise distance, set of splits).
-EXPECTED = {
-    "n16_M6.txt": (72, {3}),
-    "n8_M8.txt": (16, {4}),
-    "n7_M7.txt": (12, {3, 4}),
-    "n5_M5.txt": (6, {2, 3}),
-}
-
-# Nine permutations of length nine, pairwise at distance 20 (concluding remarks).
-NINE = ("n9_M9.txt", 20)
-
-# Codes for Theorem 9.2 and Corollary 9.3: file name -> lower bound on the pairwise distances.
-AT_LEAST = {
-    "n14_M6.txt": 54,
-    "n17_M6.txt": 78,
-    "n18_M6.txt": 90,
-    "n19_M6.txt": 102,
-    "n13_M8.txt": 44,
-    "n14_M10.txt": 50,
-    "n23_M10.txt": 140,
-    "n26_M10.txt": 180,
-    "n30_M10.txt": 240,
-    "n33_M10.txt": 290,
-    "n34_M10.txt": 310,
-    "n35_M10.txt": 330,
+# Every certificate used in the paper: file name -> (length n, size M, kind, distance, splits).
+# kind "equal": all pairwise distances equal the given distance.
+# kind "atleast": all pairwise distances are at least the given distance.
+# splits: the set of values that the split of every pair of symbols must take, or None
+# when no split condition is claimed.  For codes of size 2m-1 or 2m with minimum distance
+# m/(2m-1) * C(n,2), Lemma 2.4 of the paper forces splits m-1 or m, or m, respectively.
+CERTIFICATES = {
+    "n16_M6.txt": (16, 6, "equal", 72, {3}),
+    "n8_M8.txt": (8, 8, "equal", 16, {4}),
+    "n7_M7.txt": (7, 7, "equal", 12, {3, 4}),
+    "n5_M5.txt": (5, 5, "equal", 6, {2, 3}),
+    "n9_M9.txt": (9, 9, "equal", 20, {4, 5}),
+    "n14_M6.txt": (14, 6, "atleast", 54, None),
+    "n17_M6.txt": (17, 6, "atleast", 78, None),
+    "n18_M6.txt": (18, 6, "atleast", 90, None),
+    "n19_M6.txt": (19, 6, "atleast", 102, None),
+    "n13_M8.txt": (13, 8, "atleast", 44, None),
+    "n14_M10.txt": (14, 10, "atleast", 50, None),
+    "n23_M10.txt": (23, 10, "atleast", 140, None),
+    "n26_M10.txt": (26, 10, "atleast", 180, None),
+    "n30_M10.txt": (30, 10, "atleast", 240, None),
+    "n33_M10.txt": (33, 10, "atleast", 290, None),
+    "n34_M10.txt": (34, 10, "atleast", 310, None),
+    "n35_M10.txt": (35, 10, "atleast", 330, None),
 }
 
 
@@ -99,27 +98,45 @@ def word(p):
     return "".join(str(s) for s in p)
 
 
-def check_codes():
-    ok = True
-    for name, (dist, spl) in EXPECTED.items():
-        code = read_code(CODES / name)
-        n = len(code[0])
-        perms = all(sorted(s) == list(range(n)) for s in code)
-        dists = {kendall(a, b) for a, b in combinations(code, 2)}
+def check_certificate(path, n, M, kind, dist, spl):
+    """Check one certificate against its expected parameters.  Returns (ok, report)."""
+    problems = []
+    try:
+        code = read_code(path)
+    except (OSError, ValueError) as exc:
+        return False, f"cannot read: {exc}"
+    if len(code) != M:
+        problems.append(f"has {len(code)} codewords, expected {M}")
+    if any(len(s) != n for s in code):
+        problems.append(f"a codeword does not have length {n}")
+    if not all(sorted(s) == list(range(n)) for s in code):
+        problems.append(f"a codeword is not a permutation of 0..{n - 1}")
+    if len(set(code)) != len(code):
+        problems.append("codewords are not distinct")
+    if problems:
+        return False, "; ".join(problems)
+    dists = {kendall(a, b) for a, b in combinations(code, 2)}
+    if kind == "equal" and dists != {dist}:
+        problems.append(f"pairwise distances {sorted(dists)}, expected all equal to {dist}")
+    if kind == "atleast" and min(dists) < dist:
+        problems.append(f"minimum distance {min(dists)}, expected at least {dist}")
+    report = f"n={n}, M={M}, pairwise distances {sorted(dists)}"
+    if spl is not None:
         sp = splits(code)
-        good = perms and dists == {dist} and sp == spl
+        report += f", splits {sorted(sp)}"
+        if sp != spl:
+            problems.append(f"splits {sorted(sp)}, expected {sorted(spl)}")
+    return not problems, report + ("" if not problems else " -- " + "; ".join(problems))
+
+
+def check_codes(codes_dir=None):
+    codes_dir = Path(codes_dir) if codes_dir else CODES
+    ok = True
+    for name, (n, M, kind, dist, spl) in CERTIFICATES.items():
+        good, report = check_certificate(codes_dir / name, n, M, kind, dist, spl)
         ok &= good
-        print(f"{name}: n={n}, size {len(code)}, pairwise distances {sorted(dists)}, "
-              f"splits {sorted(sp)} -> {'OK' if good else 'FAIL'}")
-    for name, low in AT_LEAST.items():
-        code = read_code(CODES / name)
-        n = len(code[0])
-        perms = all(sorted(s) == list(range(n)) for s in code) and len(set(code)) == len(code)
-        dists = {kendall(a, b) for a, b in combinations(code, 2)}
-        good = perms and min(dists) >= low
-        ok &= good
-        print(f"{name}: n={n}, size {len(code)}, pairwise distances {sorted(dists)}, "
-              f"required at least {low} -> {'OK' if good else 'FAIL'}")
+        need = f"all distances {dist}" if kind == "equal" else f"distances at least {dist}"
+        print(f"{name}: {report}; required {need} -> {'OK' if good else 'FAIL'}")
     return ok
 
 
@@ -145,16 +162,6 @@ def check_n5():
     return (len(V), by_size[2], by_size[3], by_size[4], omega) == (20, 60, 36, 7, 4)
 
 
-def check_nine():
-    name, dist = NINE
-    code = read_code(CODES / name)
-    perms = all(sorted(s) == list(range(9)) for s in code) and len(set(code)) == 9
-    dists = {kendall(a, b) for a, b in combinations(code, 2)}
-    good = perms and dists == {dist}
-    print(f"{name}: n=9, size {len(code)}, pairwise distances {sorted(dists)} -> {'OK' if good else 'FAIL'}")
-    return good
-
-
 def check_small_lengths():
     """Lengths 3 <= n < 2*T_m for which the m-th window contains an integer d
     with d <= m/(2m-1) * T_m * floor(N/T_m), as in the proof of Corollary 9.3."""
@@ -178,8 +185,7 @@ def check_small_lengths():
 
 
 def main():
-    ok = check_codes()
-    ok &= check_nine()
+    ok = check_codes(sys.argv[1] if len(sys.argv) > 1 else None)
     ok &= check_small_lengths()
     ok &= check_n5()
     print("\nAll checks passed." if ok else "\nSome checks FAILED.")
