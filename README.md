@@ -1,8 +1,8 @@
-# Eventual Attainment of the Plotkin Bound for Kendall τ Permutation Codes in Every Fixed Window
+# Eventual Attainment of the Plotkin Bound for Kendall Permutation Codes in Every Fixed Window
 
 Supplementary material for the paper
 
-> Y. M. Chee, "Eventual attainment of the Plotkin bound for Kendall τ permutation codes in every fixed window."
+> Y. M. Chee, "Eventual attainment of the Plotkin bound for Kendall permutation codes in every fixed window."
 
 ## Contents
 

@@ -1,5 +1,5 @@
 """Verification script for "Eventual Attainment of the Plotkin Bound for Kendall
-tau Permutation Codes in Every Fixed Window" by Y. M. Chee.
+Permutation Codes in Every Fixed Window" by Y. M. Chee.
 
 Uses only the Python standard library.  Run from the repository root with
 
